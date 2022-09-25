@@ -1,0 +1,37 @@
+#!/bin/bash
+
+APP_NAME=$1
+
+#シェルの実行ディレクトリの絶対パス
+CURRENT_DIR=$(pwd)
+#このスクリプトの絶対パス
+SELF_DIR=$(cd $(dirname $0); pwd)
+#sbtplコピー元プログラムの絶対パス
+SBTPL_DIR=$(cd $SELF_DIR; cd ../sbtpl; pwd)
+
+
+mkdir $CURRENT_DIR/$APP_NAME
+cd $CURRENT_DIR/$APP_NAME
+
+
+cp -r $SBTPL_DIR/src .
+cp $SBTPL_DIR/.gitignore .
+cp $SBTPL_DIR/pom.xml .
+
+
+mv src/main/java/com/sbtpl src/main/java/com/$APP_NAME
+mv src/main/resources/com/sbtpl src/main/resources/com/$APP_NAME
+
+
+for fpath in `find . -name "*"`
+do sed -i "" s/sbtpl/$APP_NAME/g $fpath
+done
+
+for fpath in `find . -name "*.DS_Store"`
+do rm $fpath
+done
+
+git init
+
+echo "下記コマンドで実行"
+echo "mvn spring-boot:run"
