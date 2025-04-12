@@ -1,0 +1,43 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: ./docker/dev/Dockerfile.backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    volumes:
+      - .:/usr/src/app
+      - ./linux/logrotate.d/app:/etc/logrotate.d/app
+    working_dir: /usr/src/app
+    tty: true
+    environment:
+      ENV: dev
+    command: sh -c "go run cmd/main.go"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: ./docker/dev/Dockerfile.frontend
+    volumes:
+      - ./src/frontend:/app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - API_HOST=http://backend:3001
+      - NEXT_PUBLIC_API_HOST=http://localhost:3001
+    working_dir: /app
+    tty: true
+
+  db:
+    image: postgres:17.4
+    environment:
+      POSTGRES_DB: goscaf_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./migrations:/docker-entrypoint-initdb.d
+      - ./data:/var/lib/postgresql/data
