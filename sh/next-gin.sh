@@ -49,6 +49,7 @@ sed -i "" s/project_db/$PROJECT_NAME/g ./api/config/env/.env.dev
 
 sed -i "" s/APP_PORT=3000/APP_PORT=3001/g ./api/config/env/.env.sample
 sed -i "" s/APP_PORT=3000/APP_PORT=3001/g ./api/config/env/.env.dev
+sed -i "" s#COPY package*.json .#COPY ../../api/package*.json .#g ./docker/api/Dockerfile
 
 echo "🧹 Cleaning up"
 rm ./api/docker-compose.yml
@@ -61,9 +62,8 @@ rm ./web/docker-compose.prod.yml
 rm ./web/Makefile
 rm -rf ./web/.git
 
+rm setup.sh
 rm -rf .git
 rm -rf sh
 
 echo "✅ Next.js + Gin setup complete!"
-
-rm -- "$0"
