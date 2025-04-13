@@ -43,13 +43,12 @@ sed -i "" s/scaf-next/$PROJECT_NAME/g ./web/package-lock.json
 sed -i "" s/scaf-next/$PROJECT_NAME/g ./web/package.json
 
 echo "🔁 Replacing placeholder 'project_db' with app name '$PROJECT_NAME'..."
-sed -i "" s/project_db/$PROJECT_NAME/g .docker-compose.yml
+sed -i "" s/project_db/$PROJECT_NAME/g docker-compose.yml
 sed -i "" s/project_db/$PROJECT_NAME/g ./api/config/env/.env.sample
 sed -i "" s/project_db/$PROJECT_NAME/g ./api/config/env/.env.dev
 
 sed -i "" s/APP_PORT=3000/APP_PORT=3001/g ./api/config/env/.env.sample
 sed -i "" s/APP_PORT=3000/APP_PORT=3001/g ./api/config/env/.env.dev
-
 
 echo "🧹 Cleaning up"
 rm ./api/docker-compose.yml
