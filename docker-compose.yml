@@ -1,8 +1,8 @@
 services:
   api:
     build:
-      context: ./docker/api
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./docker/api/Dockerfile
     ports:
       - "3001:3001"
     depends_on:
@@ -18,8 +18,8 @@ services:
 
   web:
     build:
-      context: ./docker/web
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./docker/web/Dockerfile
     volumes:
       - ./web:/app
     ports:
@@ -27,7 +27,7 @@ services:
     environment:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
-      - API_HOST=http://backend:3001
+      - API_HOST=http://api:3001
       - NEXT_PUBLIC_API_HOST=http://localhost:3001
     working_dir: /app
     command: sh -c "npm install && npm run dev"
@@ -36,7 +36,7 @@ services:
   db:
     image: postgres:17.4
     environment:
-      POSTGRES_DB: project_db
+      POSTGRES_DB: testpr
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
