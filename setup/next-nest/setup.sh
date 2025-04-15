@@ -40,10 +40,10 @@ echo "🔁 Replacing placeholder 'project_db' with app name '$PROJECT_NAME'..."
 sed -i "" s/project_db/$PROJECT_NAME/g docker-compose.yml
 sed -i "" s/project_db/$PROJECT_NAME/g ./api/.env.sample
 
-sed -i "" s#COPY package#COPY \.\.\/\.\.\/web\/package#g ./docker/web/Dockerfile
-sed -i "" s#COPY \. \.#COPY \.\.\/\.\.\/web \.#g ./docker/web/Dockerfile
-sed -i "" s#COPY package#COPY \.\.\/\.\.\/api\/package#g ./docker/api/Dockerfile
-sed -i "" s#COPY \. \.#COPY \.\.\/\.\.\/api \.#g ./docker/api/Dockerfile
+sed -i "" 's#COPY package#COPY \.\.\/\.\.\/web\/package#g' ./docker/web/Dockerfile
+sed -i "" 's#COPY \. \.#COPY \.\.\/\.\.\/web \.#g' ./docker/web/Dockerfile
+sed -i "" 's#COPY package#COPY \.\.\/\.\.\/api\/package#g' ./docker/api/Dockerfile
+sed -i "" 's#COPY \. \.#COPY \.\.\/\.\.\/api \.#g' ./docker/api/Dockerfile
 
 echo "🧹 Cleaning up"
 rm ./api/docker-compose.yml

@@ -51,8 +51,8 @@ sed -i "" s/project_db/$PROJECT_NAME/g ./api/config/env/.env.dev
 
 sed -i "" s/APP_PORT=3000/APP_PORT=3001/g ./api/config/env/.env.sample
 sed -i "" s/APP_PORT=3000/APP_PORT=3001/g ./api/config/env/.env.dev
-sed -i "" s#COPY package#COPY \.\.\/\.\.\/web\/package#g ./docker/web/Dockerfile
-sed -i "" s#COPY \. \.#COPY \.\.\/\.\.\/web \.#g ./docker/web/Dockerfile
+sed -i "" 's#COPY package#COPY \.\.\/\.\.\/web\/package#g' ./docker/web/Dockerfile
+sed -i "" 's#COPY \. \.#COPY \.\.\/\.\.\/web \.#g' ./docker/web/Dockerfile
 
 echo "🧹 Cleaning up"
 rm ./api/docker-compose.yml
