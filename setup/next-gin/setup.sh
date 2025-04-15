@@ -21,6 +21,10 @@ mkdir -p docker/api docker/web
 mv ./api/Dockerfile ./docker/api/Dockerfile
 mv ./web/Dockerfile ./docker/web/Dockerfile
 
+echo "🐋 Moving docker-compose.yml to current"
+cp ./setup/next-gin/docker-compose.yml .
+cp ./setup/next-gin/docker-compose.prod.yml .
+
 echo "🔁 Replacing placeholder 'scaf-gin' with app name '$PROJECT_NAME'..."
 for fpath in `find ./api -name "*.go"`
 do sed -i "" s/scaf-gin/$PROJECT_NAME/g $fpath
@@ -61,7 +65,7 @@ rm ./web/Makefile
 rm -rf ./web/.git
 
 rm setup.sh
+rm -rf setup
 rm -rf .git
-rm -rf sh
 
 echo "✅ Next.js + Gin setup complete!"
