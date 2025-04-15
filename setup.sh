@@ -13,12 +13,11 @@ if [ -z "$project_name" ]; then
   exit 1
 fi
 
-chmod +x ./sh/*
-
 case $choice in
   1)
     echo "🛠️ Running setup for Next.js + Gin..."
-    bash ./sh/next-gin.sh "$project_name"
+    chmod +x ./setup/next-gin/setup.sh
+    bash ./setup/next-gin/setup.sh "$project_name"
     ;;
   *)
     echo "❌ Invalid choice. Exiting."

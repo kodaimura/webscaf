@@ -9,8 +9,6 @@ if [ -z "$PROJECT_NAME" ]; then
   exit 1
 fi
 
-TEMP_DIR="scaf_tmp_$$"
-
 GIN_REPO="https://github.com/kodaimura/scaf-gin.git"
 NEXT_REPO="https://github.com/kodaimura/scaf-next.git"
 
