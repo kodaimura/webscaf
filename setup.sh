@@ -2,6 +2,7 @@
 
 echo "🌟 Select setup type:"
 echo "1) Next.js + Gin (default)"
+echo "2) Next.js + NestJs"
 read -p "Enter number [1]: " choice
 
 choice=${choice:-1}
@@ -18,6 +19,11 @@ case $choice in
     echo "🛠️ Running setup for Next.js + Gin..."
     chmod +x ./setup/next-gin/setup.sh
     bash ./setup/next-gin/setup.sh "$project_name"
+    ;;
+  2)
+    echo "🛠️ Running setup for Next.js + NestJs..."
+    chmod +x ./setup/next-nest/setup.sh
+    bash ./setup/next-nest/setup.sh "$project_name"
     ;;
   *)
     echo "❌ Invalid choice. Exiting."
