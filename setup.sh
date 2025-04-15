@@ -3,7 +3,7 @@
 echo "🌟 Select setup type:"
 echo "1) Next.js + Gin (default)"
 echo "2) Next.js + NestJs"
-read -p "Enter number [1]: " choice
+read -p "Enter number [1-2]: " choice
 
 choice=${choice:-1}
 

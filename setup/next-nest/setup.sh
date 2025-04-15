@@ -41,6 +41,7 @@ sed -i "" s/project_db/$PROJECT_NAME/g docker-compose.yml
 sed -i "" s/project_db/$PROJECT_NAME/g ./api/.env.sample
 
 sed -i "" s#package#\.\.\/\.\.\/web\/package#g ./docker/web/Dockerfile
+sed -i "" s#package#\.\.\/\.\.\/api\/package#g ./docker/api/Dockerfile
 
 echo "🧹 Cleaning up"
 rm ./api/docker-compose.yml
