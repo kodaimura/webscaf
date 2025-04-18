@@ -6,12 +6,12 @@ services:
     volumes:
       - ./api:/app
     ports:
-      - "3001:3001"
+      - "8000:8000"
     depends_on:
       - db
     environment:
       - NODE_ENV=development
-      - PORT=3001
+      - PORT=8000
       - DB_HOST=db
       - DB_PORT=5432
       - DB_USER=postgres
@@ -34,17 +34,17 @@ services:
     environment:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
-      - API_HOST=http://api:3001
-      - NEXT_PUBLIC_API_HOST=http://localhost:3001
+      - API_HOST=http://api:8000
+      - NEXT_PUBLIC_API_HOST=http://localhost:8000
     working_dir: /app
     command: sh -c "npm install && npm run dev"
     tty: true
 
   db:
     image: postgres:17.4
-    environment:
-      - POSTGRES_DB=testpr
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
     volumes:
       - ./docker/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=project_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres

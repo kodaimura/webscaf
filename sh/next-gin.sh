@@ -21,9 +21,12 @@ mkdir -p docker/api docker/web
 mv ./api/Dockerfile ./docker/api/Dockerfile
 mv ./web/Dockerfile ./docker/web/Dockerfile
 
-echo "🐋 Moving docker-compose.yml to current"
-cp ./setup/next-gin/docker-compose.yml .
-cp ./setup/next-gin/docker-compose.prod.yml .
+echo "🐋 Moving docker-compose.yml to ."
+cp docker-compose/next-gin
+
+mkdir -p docker/api docker/web
+mv ./api/Dockerfile ./docker/api/Dockerfile
+mv ./web/Dockerfile ./docker/web/Dockerfile
 
 echo "🔁 Replacing placeholder 'scaf-gin' with app name '$PROJECT_NAME'..."
 for fpath in `find ./api -name "*.go"`
@@ -49,9 +52,7 @@ sed -i "" s/project_db/$PROJECT_NAME/g docker-compose.yml
 sed -i "" s/project_db/$PROJECT_NAME/g ./api/config/env/.env.sample
 sed -i "" s/project_db/$PROJECT_NAME/g ./api/config/env/.env.dev
 
-sed -i "" 's#COPY \. \.#COPY \.\.\/\.\.\/api \.#g' ./docker/api/Dockerfile
-sed -i "" 's#COPY package#COPY \.\.\/\.\.\/web\/package#g' ./docker/web/Dockerfile
-sed -i "" 's#COPY \. \.#COPY \.\.\/\.\.\/web \.#g' ./docker/web/Dockerfile
+sed -i "" s#package#\.\.\/\.\.\/web\/package#g ./docker/web/Dockerfile
 
 echo "🧹 Cleaning up"
 rm ./api/docker-compose.yml
@@ -65,7 +66,7 @@ rm ./web/Makefile
 rm -rf ./web/.git
 
 rm setup.sh
-rm -rf setup
 rm -rf .git
+rm -rf sh
 
 echo "✅ Next.js + Gin setup complete!"
