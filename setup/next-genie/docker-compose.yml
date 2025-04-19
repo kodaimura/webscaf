@@ -13,8 +13,9 @@ services:
     environment:
       - GENIE_ENV=dev
       - JWT_SECRET=secret
+      - FRONTEND_ORIGIN=http://localhost:3000
     working_dir: /app
-    command: ["./api/entrypoint.sh"]
+    command: ["./entrypoint.sh"]
     tty: true
 
   web:
@@ -37,7 +38,6 @@ services:
   db:
     image: postgres:17.4
     volumes:
-      - ./api/migrations:/docker-entrypoint-initdb.d
       - ./docker/data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=project_db

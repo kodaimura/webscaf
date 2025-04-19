@@ -11,7 +11,7 @@ services:
     environment:
       - GENIE_ENV=prod
     working_dir: /app
-    command: ["./api/entrypoint.sh"]
+    command: ["./entrypoint.sh"]
     tty: true
 
   web:
