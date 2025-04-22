@@ -5,7 +5,6 @@ services:
       dockerfile: ./docker/api/Dockerfile
     volumes:
       - ./api:/app
-      - ./api/linux/logrotate.d/app:/etc/logrotate.d/app
     ports:
       - "8000:8000"
     depends_on:

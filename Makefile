@@ -3,7 +3,7 @@ ENV ?= dev
 DOCKER_COMPOSE_FILE = $(if $(filter prod,$(ENV)),-f docker-compose.prod.yml,)
 DOCKER_COMPOSE_CMD = $(DOCKER_COMPOSE) $(DOCKER_COMPOSE_FILE)
 
-.PHONY: up build down stop inapi inweb logapi logweb ps help
+.PHONY: up build down stop inapi inweb logapi logweb ps reup help
 
 up:
 	$(DOCKER_COMPOSE_CMD) up -d
@@ -32,6 +32,9 @@ logweb:
 ps:
 	$(DOCKER_COMPOSE_CMD) ps
 
+reup: down up
+	@echo "Containers have been re-up'd."
+
 help:
 	@echo "Usage: make [target] [ENV=dev|prod]"
 	@echo ""
@@ -45,3 +48,4 @@ help:
 	@echo "  logapi    Show logs for the api container"
 	@echo "  logweb    Show logs for the web container"
 	@echo "  ps        Show status for containers"
+	@echo "  reup      Re-up containers"
