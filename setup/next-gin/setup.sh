@@ -9,10 +9,10 @@ if [ -z "$PROJECT_NAME" ]; then
   exit 1
 fi
 
-GIN_REPO="https://github.com/kodaimura/scaf-gin.git"
+GIN_REPO="https://github.com/kodaimura/scaf-gin-api.git"
 NEXT_REPO="https://github.com/kodaimura/scaf-next.git"
 
-echo "📦 Cloning scaf-gin and scaf-next..."
+echo "📦 Cloning scaf-gin-api and scaf-next..."
 git clone "$GIN_REPO" api
 git clone "$NEXT_REPO" web
 
@@ -21,21 +21,20 @@ mkdir -p docker/api docker/web
 mv ./api/Dockerfile ./docker/api/Dockerfile
 mv ./web/Dockerfile ./docker/web/Dockerfile
 
-echo "🐋 Moving docker-compose.yml to current"
 cp ./setup/next-gin/docker-compose.yml .
 cp ./setup/next-gin/docker-compose.prod.yml .
+cp ./setup/next-gin/Makefile .
 
 echo "🔁 Replacing placeholder 'scaf-gin' with app name '$PROJECT_NAME'..."
 for fpath in `find ./api -name "*.go"`
 do sed -i "" s/scaf-gin/$PROJECT_NAME/g $fpath
 done
+
 sed -i "" s/scaf-gin/$PROJECT_NAME/g ./api/go.mod
 sed -i "" s/scaf-gin/$PROJECT_NAME/g ./api/config/env/.env.sample
 sed -i "" s/scaf-gin/$PROJECT_NAME/g ./api/config/env/.env.dev
 sed -i "" s/scaf-gin/$PROJECT_NAME/g ./api/config/env/.env.prod
 sed -i "" s/scaf-gin/$PROJECT_NAME/g ./api/web/static/manifest.json
-sed -i "" s/scaf-gin/$PROJECT_NAME/g ./api/web/template/_head.html
-sed -i "" s/scaf-gin/$PROJECT_NAME/g ./api/web/template/_header.html
 
 echo "🔁 Replacing placeholder 'scaf-next' with app name '$PROJECT_NAME'..."
 for fpath in `find ./web -name "*.tsx"`
