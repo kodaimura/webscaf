@@ -17,13 +17,16 @@ git clone "$GENIE_REPO" clonetmp
 echo "🔁 Replacing placeholder 'ScafGenie' with app name '$PROJECT_NAME'..."
 for fpath in `find ./clonetmp -name "*.jl" -o -name "*.toml" -o -name "*.html"`
 do sed -i "" s/ScafGenie/$PROJECT_NAME/g $fpath
+done
 
 mv ./clonetmp/src/ScafGenie.jl ./clonetmp/src/$PROJECT_NAME.jl 
 
 echo "🧹 Cleaning up"
-mv clonetmp/* .
-rm -rf clonetmp
 rm -rf .git
+rm -rf clonetmp/.git
+rm -rf clonetmp/.vscode
+mv clonetmp/* clonetmp/.[!.]* .
+rm -rf clonetmp
 rm -rf setup
 rm setup.sh
 
