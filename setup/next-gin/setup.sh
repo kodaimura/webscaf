@@ -29,10 +29,10 @@ echo "🔁 Replacing placeholder 'scaf-gin' with app name '$PROJECT_NAME'..."
 for fpath in `find ./api -name "*.go"`
 do sed -i "" s/scaf-gin/$PROJECT_NAME/g $fpath
 done
-sed -i "" s/scaf-gin/$PROJECT_NAME/g ./api/README.md
 sed -i "" s/scaf-gin/$PROJECT_NAME/g ./api/go.mod
 sed -i "" s/scaf-gin/$PROJECT_NAME/g ./api/config/env/.env.sample
 sed -i "" s/scaf-gin/$PROJECT_NAME/g ./api/config/env/.env.dev
+sed -i "" s/scaf-gin/$PROJECT_NAME/g ./api/config/env/.env.prod
 sed -i "" s/scaf-gin/$PROJECT_NAME/g ./api/web/static/manifest.json
 sed -i "" s/scaf-gin/$PROJECT_NAME/g ./api/web/template/_head.html
 sed -i "" s/scaf-gin/$PROJECT_NAME/g ./api/web/template/_header.html
@@ -48,6 +48,7 @@ echo "🔁 Replacing placeholder 'project_db' with app name '$PROJECT_NAME'..."
 sed -i "" s/project_db/$PROJECT_NAME/g docker-compose.yml
 sed -i "" s/project_db/$PROJECT_NAME/g ./api/config/env/.env.sample
 sed -i "" s/project_db/$PROJECT_NAME/g ./api/config/env/.env.dev
+sed -i "" s/project_db/$PROJECT_NAME/g ./api/config/env/.env.prod
 
 sed -i "" 's#COPY \. \.#COPY \.\.\/\.\.\/api \.#g' ./docker/api/Dockerfile
 sed -i "" 's#COPY package#COPY \.\.\/\.\.\/web\/package#g' ./docker/web/Dockerfile
