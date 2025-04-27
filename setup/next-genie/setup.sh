@@ -56,5 +56,6 @@ rm -rf ./web/.git
 rm setup.sh
 rm -rf setup
 rm -rf .git
+rm README.md
 
 echo "✅ Next.js + Genie setup complete!"

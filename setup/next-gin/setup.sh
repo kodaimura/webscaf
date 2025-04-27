@@ -34,7 +34,6 @@ sed -i "" s/scaf-gin/$PROJECT_NAME/g ./api/go.mod
 sed -i "" s/scaf-gin/$PROJECT_NAME/g ./api/config/env/.env.sample
 sed -i "" s/scaf-gin/$PROJECT_NAME/g ./api/config/env/.env.dev
 sed -i "" s/scaf-gin/$PROJECT_NAME/g ./api/config/env/.env.prod
-sed -i "" s/scaf-gin/$PROJECT_NAME/g ./api/web/static/manifest.json
 
 echo "🔁 Replacing placeholder 'scaf-next' with app name '$PROJECT_NAME'..."
 for fpath in `find ./web -name "*.tsx"`
@@ -67,5 +66,6 @@ rm -rf ./web/.git
 rm setup.sh
 rm -rf setup
 rm -rf .git
+rm README.md
 
 echo "✅ Next.js + Gin setup complete!"
