@@ -42,12 +42,6 @@ done
 sed -i "" s/scaf-next/$PROJECT_NAME/g ./web/package-lock.json
 sed -i "" s/scaf-next/$PROJECT_NAME/g ./web/package.json
 
-echo "🔁 Replacing placeholder 'project_db' with app name '$PROJECT_NAME'..."
-sed -i "" s/project_db/$PROJECT_NAME/g docker-compose.yml
-sed -i "" s/project_db/$PROJECT_NAME/g ./api/config/env/.env.sample
-sed -i "" s/project_db/$PROJECT_NAME/g ./api/config/env/.env.dev
-sed -i "" s/project_db/$PROJECT_NAME/g ./api/config/env/.env.prod
-
 sed -i "" 's#COPY \. \.#COPY \.\.\/\.\.\/api \.#g' ./docker/api/Dockerfile
 sed -i "" 's#COPY package#COPY \.\.\/\.\.\/web\/package#g' ./docker/web/Dockerfile
 sed -i "" 's#COPY \. \.#COPY \.\.\/\.\.\/web \.#g' ./docker/web/Dockerfile
